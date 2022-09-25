@@ -12,7 +12,7 @@ CREATE TABLE clientes (
 id_cliente INTEGER PRIMARY KEY IDENTITY (1,1),
 identidad VARCHAR(15) NOT NULL UNIQUE CONSTRAINT CK_clientes_identidad CHECK (identidad LIKE '[0-1][0-8][0-2][0-4][-][1-2][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9][0-9]'),
 nombre VARCHAR (100) NOT NULL,
-telefono VARCHAR (100) NOT NULL,
+telefono INTEGER NOT NULL,
 );
 GO
 
@@ -26,9 +26,9 @@ GO
 CREATE TABLE boletos(
 id_boletos INTEGER PRIMARY KEY IDENTITY (1,1),
 codigo_boleto INTEGER UNIQUE,
-no_vuelo VARCHAR(100) NOT NULL,
+no_vuelo INTEGER NOT NULL,
 fecha DATE NOT NULL,
-destino VARCHAR(250) NOT NULL CONSTRAINT CK_boletos_destino CHECK (destino in ('Mexico','Guatemala','Panama')),
+destino VARCHAR(20) NOT NULL CONSTRAINT CK_boletos_destino CHECK (destino in ('Mexico','Guatemala','Panama')),
 aerolinea INTEGER NOT NULL FOREIGN KEY REFERENCES aerolinea(id_aerolinea),
 );
 GO
