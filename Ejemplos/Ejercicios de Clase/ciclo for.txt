@@ -1,0 +1,18 @@
+--ciclo for
+DECLARE
+   ITERACION NUMBER(3); --NO ES NECESARIO INICIALIZAR
+   VALOR_INICIAL NUMBER(3):=0;
+   VALOR_FINAL NUMBER(3):=6;
+   --SYSDATE retorna la fecha actual del sistema
+   FECHA DATE;
+BEGIN
+    -- VARIABLE Y RANGO
+    -- los valores del rango se pueden sustituir por una variable
+    FOR ITERACION IN VALOR_INICIAL..VALOR_FINAL LOOP
+    --SUMARLE MAS DIAS
+     FECHA:= SYSDATE + ITERACION;
+     DBMS_OUTPUT.PUT_LINE('CICLO '||ITERACION);
+     DBMS_OUTPUT.PUT_LINE('FECHA '||FECHA);
+     --SIN INCREMENTO
+     END LOOP;
+END;

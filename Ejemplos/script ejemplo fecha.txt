@@ -1,0 +1,110 @@
+
+
+
+SELECT * FROM EMPLOYEES WHERE HIRE_DATE='13-JAN-01';
+
+INSERT INTO LOG_TABLE VALUES('test',USER, '09-OCT-2022', 'test 1','test2' );
+
+
+INSERT INTO LOG_TABLE VALUES('test',USER, TO_DATE('09-10-2022', 'DD/MM/YY'), 'test 1','test2' );
+
+SELECT * FROM LOG_TABLE;
+
+SELECT 
+ first_name,
+ last_name, 
+ hire_date,
+ ADD_MONTHS(hire_date,6) as fecha_evaluacion,
+ ROUND(MONTHS_BETWEEN(SYSDATE, hire_date)/12,1) as tiempo_empresa
+FROM employees;
+
+
+select a.first_name,a.hire_date orig,
+       to_char(a.hire_date, 'MON')mes_nombre,
+       to_char(a.hire_date, 'MM')mes_numero,
+       to_char(a.hire_date, 'MONTH')mes,
+       to_char(a.hire_date, 'DY')dia_semana
+from EMPLOYEES a;
+
+
+--- SQL
+
+
+SELECT a.employee_id,a.first_name,b.department_name,c.job_title 
+ FROM EMPLOYEES a
+ inner join DEPARTMENTS b
+  on a.department_id=b.department_id
+ inner join JOBS c
+ on a.job_id=c.job_id
+ order by 1;
+
+
+SELECT SUM(SALARY) FROM EMPLOYEES;
+SELECT COUNT(EMPLOYEE_ID)  FROM EMPLOYEES;
+SELECT MAX(SALARY)  FROM EMPLOYEES;
+SELECT MIN(SALARY)  FROM EMPLOYEES;
+SELECT AVG(SALARY)  FROM EMPLOYEES;
+
+----
+CREATE TABLE PERSONA 
+(
+    ID_PERSONA INT NOT NULL PRIMARY KEY,
+    NOMBRE VARCHAR2(50),
+    EMAIL VARCHAR(30),
+     ESTADO CHAR(1),
+    CONSTRAINT CK_SITUA CHECK(ESTADO IN('C','S','D'))
+    );
+
+--PROCEDURE DE CADASTRO
+CREATE OR REPLACE PROCEDURE PERSONA_CRUD (
+                                  OPERACION  IN     CHAR,
+                                   ID_PERSONA IN INTEGER,
+                                  NOMBRE    IN   VARCHAR2,
+                                  EMAIL   IN   VARCHAR2,
+                                  ESTADO IN   CHAR)
+IS
+BEGIN   
+  IF (OPERACION = 'I') THEN
+    IF (ID_PERSONA is null or   NOMBRE='' or NOMBRE is null OR NOMBRE='' or  EMAIL is null or EMAIL='')
+        then 
+            ROLLBACK;
+        else
+        INSERT INTO PERSONA VALUES (ID_PERSONA, NOMBRE, EMAIL,ESTADO);
+        dbms_output.put_line('DADOS INSERTADOS'); 
+        COMMIT;
+    end if;
+     
+  END IF;   
+   
+  EXCEPTION
+
+     WHEN OTHERS THEN
+        IF SQLCODE='-00001' THEN
+             DBMS_OUTPUT.PUT_LINE('ERROR: CODIGO YA EXISTE! ');
+             DBMS_OUTPUT.PUT_LINE('ERROR: '||SQLERRM);
+        ELSE
+            DBMS_OUTPUT.PUT_LINE('CODIGO: '||SQLCODE);
+            DBMS_OUTPUT.PUT_LINE('ERROR: '||SQLERRM);
+            RAISE;
+        END IF;
+    ROLLBACK;
+      
+END ;
+/
+
+SET SERVEROUTPUT ON
+DECLARE
+    P_OPER CHAR(1);
+    P_ID INT;
+    P_NOMBRE VARCHAR2(50);
+    P_EMAIL VARCHAR2(30);
+    P_ESTADO CHAR(1);
+    BEGIN
+      P_OPER:='I';
+      P_ID:=1;
+      P_NOMBRE:='Eduardo';
+      P_EMAIL:='ducatolico@gmail.com';
+      P_ESTADO:='C';
+    
+        PERSONA_CRUD(P_OPER,P_ID,P_NOMBRE,P_EMAIL,P_ESTADO);
+    END;

@@ -1,0 +1,22 @@
+-- creacion de secuencias
+-- una secuencia es un objeto que creamos para poder utilizar valores secuenciales,se puede utilizar
+-- en campos autoincrementables de una o varias tablas
+-- a los nombres de las secuencias les  agregaremos el prefijo SQ
+
+CREATE SEQUENCE SQ_TABLA_CATEGORIAS
+START WITH 5
+INCREMENT BY 1;
+
+--NEXTVAL, obtener el siguiente valor de la secuencia
+--CURVAL, obtiene el actual
+INSERT INTO CATEGORIES VALUES(SQ_TABLA_CATEGORIAS.NEXTVAL,'MINI BICICLETAS');
+
+DECLARE
+  VALOR_ACTUAL_SQ NUMBER;
+BEGIN
+  VALOR_ACTUAL_SQ:=SQ_TABLA_CATEGORIAS.CURRVAL;
+  DBMS_OUTPUT.put_line('EL VALOR ACTUAL DE LA SECUENCIA ES: '||VALOR_ACTUAL_SQ);
+  COMMIT;
+END;
+
+SET SERVEROUTPUT ON;

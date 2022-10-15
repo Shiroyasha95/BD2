@@ -1,0 +1,14 @@
+SELECT * FROM BD_CENSO.PAISES;
+
+INSERT INTO BD_CENSO.PAISES VALUES(29,'Honduras',29);
+
+--BLOQUE ANONIMO
+DECLARE
+-- := para asignar valores a las variables
+    nombre_Completo VARCHAR2(100):= 'Andrea Michelle Calix';
+BEGIN
+--|| para concatenar
+   DBMS_OUTPUT.PUT_LINE('El nombre de la persona es: '|| nombre_Completo);
+END;
+-- habilitar la salida de datos
+SET SERVEROUTPUT ON;

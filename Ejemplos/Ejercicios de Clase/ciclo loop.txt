@@ -1,0 +1,18 @@
+--LOOP al menos se ejecuta una vez similar al do-while
+DECLARE
+   ITERACION NUMBER(3):=0;
+   --SYSDATE retorna la fecha actual del sistema
+   FECHA DATE;
+  
+BEGIN
+    LOOP
+    --SUMARLE MAS DIAS
+     FECHA:= SYSDATE + ITERACION;
+     EXIT WHEN (ITERACION>3);
+     DBMS_OUTPUT.PUT_LINE('CICLO '||ITERACION);
+     DBMS_OUTPUT.PUT_LINE('FECHA '||FECHA);
+     ITERACION := ITERACION + 1;
+     END LOOP;
+END;
+
+SET SERVEROUTPUT ON;

@@ -1,0 +1,28 @@
+--arreglos asociativos
+-- es un elemento en donde vamos aguardar valores se compone de dos columnas, indice y valor
+DECLARE
+   TYPE ARREGLO IS TABLE OF VARCHAR2(100) INDEX BY PLS_INTEGER;
+   DATOS ARREGLO;
+BEGIN
+  DATOS(1):='ELEMENTO 1';
+  DATOS(2):='ELEMENTO 2';
+  DATOS(3):='ELEMENTO 3';
+  DATOS(4):='ELEMENTO 4';
+  DATOS(5):='ELEMENTO 5';
+  DATOS(6):='ELEMENTO 6';
+  
+  FOR ITERACION IN 1..DATOS.COUNT LOOP
+   DBMS_OUTPUT.PUT_LINE(DATOS(ITERACION));
+   
+  END LOOP;
+  --retorna el indice anterior
+  DBMS_OUTPUT.PUT_LINE(DATOS.PRIOR(3));
+  --retorna el siguiente indice
+   DBMS_OUTPUT.PUT_LINE(DATOS.NEXT(3));
+   -- delete 
+   DATOS.DELETE(1);
+   DBMS_OUTPUT.PUT_LINE('LA CANTIDAD DE REGISTROS QUE HAY EN EL ARREGLO ES: '||DATOS.COUNT);
+   -- variacion de delete se borra entre los indices
+   DATOS.DELETE(2,4);
+   DBMS_OUTPUT.PUT_LINE('LA CANTIDAD DE REGISTROS QUE HAY EN EL ARREGLO ES: '||DATOS.COUNT);
+END;

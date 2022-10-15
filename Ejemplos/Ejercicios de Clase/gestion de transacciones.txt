@@ -1,0 +1,19 @@
+--gestion de transacciones vinculado con la gestion de excepciones
+DECLARE
+ 
+BEGIN 
+   --realizar una insercion, UNA TRANSACCION constituye operaciones que se realizan sobre la base de datos
+   --se puede realizar sobre una tablao sobre varias tablas
+   INSERT INTO BRANDS VALUES(13,'MONTAIN BICI');
+   COMMIT;
+   INSERT INTO BRANDS VALUES(14,'BICI SHOP');  
+   COMMIT;
+   INSERT INTO BRANDS VALUES(12,'ELECTRO BICI');
+   --COMMIT aprueba los cambios que inserte
+   COMMIT;
+   
+   EXCEPTION 
+     WHEN DUP_VAL_ON_INDEX THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR DE LLAVE PRIMARIA');
+        ROLLBACK;
+END;

@@ -1,0 +1,20 @@
+--LOS PAQUETES
+-- son una estructura que encapsula funciones, procedimientos y variables es como una caja
+
+--sintaxis de los paquetes 
+
+--encabezados nombre de la funcion y parametros 
+CREATE OR REPLACE PACKAGE <NOMBRE DEL PAQUETE>
+IS
+   <CREAR VARIABLES>
+   <INDICAR ENCABEZADO DE FUNCIONES>
+   <INDICAR ENCABEZADO DE LOS PROCEDIMIENTOS>
+END;
+
+
+-- CREAR EL CUERPO DEL PAQUETE 
+CREATE OR REPLACE PACKAGE BODY <NOMBRE DEL PAQUETE >
+IS
+   <CUERPO DE LAS FUNCIONES>
+   <CUERPO DE LOS PROCEDIMIENTOS>
+END;

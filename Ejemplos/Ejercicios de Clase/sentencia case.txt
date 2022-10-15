@@ -1,0 +1,27 @@
+DECLARE
+--cantidad de digitos y 2 decimales
+   RESULTADO NUMBER(10,2);
+--solo almacena numeros enteros
+   PARAMETRO NUMBER(1):=1;
+-- al no tener parantesis esta variable puede almacenar hasta 38 digitos por default
+   PORCENTAJE NUMBER;
+   SALARIO NUMBER(10,2):=14000;
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('EL AUMENTO PARA UN EMPLEADO ES: ');
+   CASE
+   --COMPARAR = 
+   WHEN (PARAMETRO = 1) THEN
+      DBMS_OUTPUT.PUT_LINE('Condicion 1, empleado con 5 anios trabajando');
+      PORCENTAJE := 0.05;
+      RESULTADO := PORCENTAJE * SALARIO;
+      
+   WHEN (PARAMETRO = 2)THEN
+      DBMS_OUTPUT.PUT_LINE('Condicion 2, empleado con 10 anios trabajando');
+      PORCENTAJE := 0.15;
+      RESULTADO := PORCENTAJE * SALARIO;
+   ELSE
+   DBMS_OUTPUT.PUT_LINE('NO SE PUEDE CALCULAR EL NUEVO AUMENTO CON LOS DATOS PROPORCIONADOS');
+   
+   END CASE;
+   DBMS_OUTPUT.PUT_LINE(RESULTADO);
+END;

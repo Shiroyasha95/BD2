@@ -1,0 +1,24 @@
+--triggers
+-- es un disparador automatico que se asocia a una tabla, este trigger se ejecuta de forma automatica antes o despues 
+--de un insert,delete,update.
+
+--se pueden utilizar dos variables la variable NEW y la variable OLD
+-- la variable NEW obtiene los valores nuevos a insertar o valores a modificar
+-- la variable OLD obtiene los valores viejos/eliminados o modificados
+
+--crear o reemplazar
+CREATE OR REPLACE TRIGGER TG_SQ_TABLA_CATEGORIAS 
+BEFORE INSERT ON CATEGORIES
+FOR EACH ROW 
+DECLARE
+  
+BEGIN
+  :NEW.CATEGORY_ID:=SQ_TABLA_CATEGORIAS.NEXTVAL;
+END;
+
+--los triggers no reciben parametros 
+DECLARE
+BEGIN
+   INSERT INTO CATEGORIES (CATEGORY_NAME) VALUES('BICICLETAS URBANAS');
+  COMMIT;
+END;

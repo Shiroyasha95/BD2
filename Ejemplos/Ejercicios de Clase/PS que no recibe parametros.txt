@@ -1,0 +1,14 @@
+--Procedimiento almacenado que obtenga la cantidad total de productos
+
+CREATE OR REPLACE PROCEDURE SP_CANT_PRODUCT 
+IS
+  CANTIDAD NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO CANTIDAD  FROM PRODUCTS;
+  DBMS_OUTPUT.put_line('LA CANTIDAD DE PRODUCTOS ES: '||CANTIDAD);
+  
+END;
+
+EXECUTE SP_CANT_PRODUCT;
+
+--Para poder ejecutar el procedimiento se debe usar execute o un bloque anonimo
